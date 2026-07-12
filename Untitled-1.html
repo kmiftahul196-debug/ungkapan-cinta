@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#1f0a14">
+<title>🌸 I Love Zahra</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌸</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Great+Vibes&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg-deep: #1f0a14;
+    --bg-mid: #3b1220;
+    --rose: #c4657a;
+    --rose-light: #f0afc0;
+    --gold: #e3b575;
+    --cream: #fbf2e9;
+  }
+
+  * { box-sizing: border-box; }
+
+  html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+  }
+
+  body {
+    font-family: 'Cormorant Garamond', serif;
+    background: var(--bg-deep);
+    color: var(--cream);
+  }
+
+  ::selection {
+    background: var(--rose);
+    color: var(--bg-deep);
+  }
+
+  .scene {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow: hidden;
+    min-height: 100vh;
+    min-height: 100dvh;
+    padding: 2.5rem 1.25rem 1.5rem;
+    background: radial-gradient(ellipse at 50% 32%, var(--bg-mid) 0%, var(--bg-deep) 72%);
+    text-align: center;
+  }
+
+  .stars, .petals-bg {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+  .stars { z-index: 0; }
+  .petals-bg { z-index: 1; }
+
+  .star {
+    position: absolute;
+    border-radius: 50%;
+    background: var(--cream);
+    animation-name: twinkle;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
+  }
+  @keyframes twinkle {
+    0%, 100% { opacity: 0.12; }
+    50% { opacity: 0.85; }
+  }
+
+  .fpetal {
+    position: absolute;
+    bottom: -6%;
+    border-radius: 50% 0 50% 0;
+    animation-name: drift;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+  }
+  .fpetal-rose { background: var(--rose); opacity: 0.55; }
+  .fpetal-gold { background: var(--gold); opacity: 0.5; }
+  @keyframes drift {
+    0%   { transform: translateY(0) translateX(0) rotate(15deg); opacity: 0; }
+    8%   { opacity: 0.65; }
+    92%  { opacity: 0.3; }
+    100% { transform: translateY(-118vh) translateX(var(--drift, 20px)) rotate(210deg); opacity: 0; }
+  }
+
+  .content {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: clamp(0.75rem, 3vw, 1.5rem);
+    max-width: 640px;
+    margin: auto 0;
+  }
+
+  .glow {
+    position: absolute;
+    inset: 0;
+    margin: auto;
+    width: min(85vw, 560px);
+    height: min(85vw, 560px);
+    background: radial-gradient(circle, rgba(227,181,117,0.55) 0%, rgba(227,181,117,0) 68%);
+    opacity: 0;
+    transition: opacity 1.6s ease;
+    pointer-events: none;
+    z-index: 0;
+  }
+  .scene.bloomed .glow { opacity: 1; }
+
+  .flower-btn {
+    position: relative;
+    z-index: 1;
+    display: block;
+    background: none;
+    border: none;
+    margin: 0;
+    padding: 0;
+    cursor: pointer;
+    width: clamp(180px, 42vw, 300px);
+    aspect-ratio: 1;
+    animation: breathe 3.6s ease-in-out infinite;
+  }
+  .scene.bloomed .flower-btn { animation: none; }
+  .flower-btn:focus-visible {
+    outline: 2px solid var(--gold);
+    outline-offset: 10px;
+    border-radius: 50%;
+  }
+  @keyframes breathe {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.045); }
+  }
+
+  .flower { width: 100%; height: 100%; overflow: visible; display: block; }
+
+  .petal {
+    transform-box: view-box;
+    transform-origin: 200px 200px;
+    transform: rotate(var(--angle)) scale(0.12);
+    transition: transform 1.15s cubic-bezier(0.34, 1.56, 0.64, 1);
+    transition-delay: var(--d);
+  }
+  .scene.bloomed .petal {
+    transform: rotate(var(--angle)) scale(1);
+  }
+  .petal-a { fill: var(--rose); }
+  .petal-b { fill: var(--rose-light); }
+
+  .flower-center {
+    transition: filter 1.2s ease;
+    filter: drop-shadow(0 0 4px rgba(227,181,117,0.4));
+  }
+  .scene.bloomed .flower-center {
+    filter: drop-shadow(0 0 20px rgba(227,181,117,0.9));
+  }
+
+  .status {
+    display: grid;
+    place-items: center;
+    min-height: 5.5rem;
+  }
+  .status > * { grid-area: 1 / 1; }
+
+  .hint {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 300;
+    letter-spacing: 0.04em;
+    font-size: clamp(0.85rem, 2.4vw, 1rem);
+    color: var(--rose-light);
+    opacity: 0.85;
+    margin: 0;
+    animation: pulseHint 2.6s ease-in-out infinite;
+  }
+  .scene.bloomed .hint {
+    animation: none;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+  }
+  @keyframes pulseHint {
+    0%, 100% { opacity: 0.55; }
+    50% { opacity: 0.95; }
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(12px);
+    transition: opacity 1s ease, transform 1s ease;
+  }
+  .scene.bloomed .reveal {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: 0.55s;
+  }
+
+  .headline {
+    font-family: 'Great Vibes', cursive;
+    font-weight: 400;
+    font-size: clamp(2.75rem, 10vw, 5rem);
+    margin: 0;
+    color: var(--gold);
+    text-shadow: 0 0 26px rgba(227,181,117,0.55), 0 0 6px rgba(227,181,117,0.45);
+    line-height: 1.15;
+  }
+
+  .subtext {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-weight: 500;
+    font-size: clamp(1rem, 2.6vw, 1.2rem);
+    color: var(--cream);
+    opacity: 0.92;
+    margin: 0.6rem auto 0;
+    max-width: 32ch;
+  }
+
+  .signature {
+    position: relative;
+    z-index: 2;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 0.8rem;
+    letter-spacing: 0.08em;
+    color: var(--rose-light);
+    opacity: 0.5;
+    margin: 1.5rem 0 0;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    * {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+</style>
+</head>
+<body>
+  <div class="scene" id="scene">
+    <div class="stars" id="stars"></div>
+    <div class="petals-bg" id="petalsBg"></div>
+
+    <div class="content">
+      <div class="glow" aria-hidden="true"></div>
+
+      <button class="flower-btn" id="flowerBtn" type="button" aria-pressed="false" aria-label="Sentuh untuk memekarkan bunga">
+        <svg class="flower" viewBox="0 0 400 400" aria-hidden="true">
+          <defs>
+            <radialGradient id="centerGlow" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="#fff3da"/>
+              <stop offset="55%" stop-color="#e3b575"/>
+              <stop offset="100%" stop-color="#a8742f"/>
+            </radialGradient>
+          </defs>
+
+          <g class="petal petal-a" style="--angle:0deg; --d:0s"><path d="M200,200 C218,155 222,105 200,65 C182,105 178,155 200,200 Z"/></g>
+          <g class="petal petal-b" style="--angle:45deg; --d:0.05s"><path d="M200,200 C218,155 222,105 200,65 C182,105 178,155 200,200 Z"/></g>
+          <g class="petal petal-a" style="--angle:90deg; --d:0.1s"><path d="M200,200 C218,155 222,105 200,65 C182,105 178,155 200,200 Z"/></g>
+          <g class="petal petal-b" style="--angle:135deg; --d:0.15s"><path d="M200,200 C218,155 222,105 200,65 C182,105 178,155 200,200 Z"/></g>
+          <g class="petal petal-a" style="--angle:180deg; --d:0.2s"><path d="M200,200 C218,155 222,105 200,65 C182,105 178,155 200,200 Z"/></g>
+          <g class="petal petal-b" style="--angle:225deg; --d:0.25s"><path d="M200,200 C218,155 222,105 200,65 C182,105 178,155 200,200 Z"/></g>
+          <g class="petal petal-a" style="--angle:270deg; --d:0.3s"><path d="M200,200 C218,155 222,105 200,65 C182,105 178,155 200,200 Z"/></g>
+          <g class="petal petal-b" style="--angle:315deg; --d:0.35s"><path d="M200,200 C218,155 222,105 200,65 C182,105 178,155 200,200 Z"/></g>
+
+          <circle class="flower-center" cx="200" cy="200" r="25" fill="url(#centerGlow)"/>
+        </svg>
+      </button>
+
+      <div class="status">
+        <p class="hint" id="hint">Sentuh bunga untuk memekarkannya</p>
+        <div class="reveal" id="reveal" aria-live="polite">
+          <h1 class="headline" lang="en">I Love Zahra</h1>
+          <p class="subtext">Zahra, kau adalah bunga paling indah yang pernah mekar di hidupku.</p>
+        </div>
+      </div>
+    </div>
+
+    <p class="signature">dengan cinta, selalu</p>
+  </div>
+
+  <script>
+    (function () {
+      const scene = document.getElementById('scene');
+      const btn = document.getElementById('flowerBtn');
+
+      btn.addEventListener('click', function () {
+        const next = !scene.classList.contains('bloomed');
+        scene.classList.toggle('bloomed', next);
+        btn.setAttribute('aria-pressed', String(next));
+        btn.setAttribute('aria-label', next ? 'Sentuh untuk menutup bunga' : 'Sentuh untuk memekarkan bunga');
+      });
+
+      function rand(min, max) { return Math.random() * (max - min) + min; }
+
+      const starsEl = document.getElementById('stars');
+      let starsHtml = '';
+      for (let i = 0; i < 50; i++) {
+        const left = rand(0, 100).toFixed(2);
+        const top = rand(0, 65).toFixed(2);
+        const size = rand(1, 2.6).toFixed(2);
+        const dur = rand(2, 5).toFixed(2);
+        const delay = rand(0, 4).toFixed(2);
+        starsHtml += '<span class="star" style="left:' + left + '%; top:' + top + '%; width:' + size + 'px; height:' + size + 'px; animation-duration:' + dur + 's; animation-delay:' + delay + 's;"></span>';
+      }
+      starsEl.innerHTML = starsHtml;
+
+      const petalsEl = document.getElementById('petalsBg');
+      let petalsHtml = '';
+      for (let i = 0; i < 18; i++) {
+        const left = rand(0, 100).toFixed(2);
+        const size = rand(8, 18).toFixed(1);
+        const dur = rand(13, 24).toFixed(2);
+        const delay = rand(0, 20).toFixed(2);
+        const drift = rand(-40, 40).toFixed(0);
+        const tone = i % 2 === 0 ? 'rose' : 'gold';
+        petalsHtml += '<span class="fpetal fpetal-' + tone + '" style="left:' + left + '%; width:' + size + 'px; height:' + size + 'px; animation-duration:' + dur + 's; animation-delay:' + delay + 's; --drift:' + drift + 'px;"></span>';
+      }
+      petalsEl.innerHTML = petalsHtml;
+    })();
+  </script>
+</body>
+</html>
